@@ -1,0 +1,164 @@
+@use 'variaveis';
+@use 'hero';
+@use 'shows';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: avenir, sans-serif;
+}
+
+@font-face {
+    font-family: avenir;
+    src: url(../../assets/fonts/Avenir-Regular.woff2);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: avenir;
+    src: url(../../assets/fonts/Avenir-Bold.woff2);
+    font-weight: 700;
+}
+
+body {
+    background-color: variaveis.$corDeFundo;
+}
+
+@mixin text($fontSize: 16px) {
+    font-size: $fontSize;
+    line-height: calc(#{$fontSize} + 10px);
+    color: variaveis.$corTextoPrincipal;
+}
+
+@mixin title($fontSize: 40px) {
+    @include text($fontSize);
+    color: variaveis.$corTextoSecundario;
+}
+
+.text--big {
+    @include text(18px);
+}
+
+.text {
+    @include text;
+}
+
+.text--small {
+    @include text(12px);
+}
+
+.link-text {
+    @include text(18px);
+    color: variaveis.$corTextoSecundario;
+    text-decoration: underline;
+}
+
+.title--big {
+    @include title(44px);
+}
+
+.title {
+    @include title;
+}
+
+.title--small {
+    @include title(28px);
+}
+
+.hero {
+    padding: 3.0vw;
+    min-height: 50vh;
+    background-image: url(../images/hero_desktop.jpeg);
+    background-size: cover;
+    background-position: left center;
+    text-align: left;
+
+    &__content {
+        max-width: 600px;
+        margin: 0;
+    }
+
+    &__branding {
+        max-width: 280px;
+        margin: 0 0 30px;
+    }
+
+    .title--small {
+        margin-bottom: 48px;
+    }
+
+    p {
+        margin-bottom: 16px;
+    }
+
+    &__combos {
+        display: flex;
+        flex-wrap: wrap; // Para melhor ajuste em telas menores
+        gap: 10px; // Espaço entre os itens
+
+        &__combo {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto; // Centraliza os itens em telas menores
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block; // Remove espaço abaixo da imagem
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                height: 50px;
+                font-size: 16px;
+                color: variaveis.$corTextoSecundario;
+                background-color: #6421ff;
+                text-transform: uppercase;
+                border-radius: 4px;
+                margin-top: 1.5vw;
+                margin-bottom: 6px;
+            }
+        }
+    }
+}
+
+// Responsividade
+@media (max-width: 1024px) {
+    .hero {
+        padding: 5vw;
+        background-position: center;
+    }
+
+    .hero__content__branding {
+        max-width: 200px;
+    }
+
+    .hero__content__combos__combo {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero__content__combos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero__content__combos__combo {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title--big {
+        @include title(36px);
+    }
+
+    .text--big {
+        @include text(16px);
+    }
+}
