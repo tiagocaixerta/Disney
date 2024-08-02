@@ -1,6 +1,7 @@
 @use 'variaveis';
 @use 'hero';
 @use 'shows';
+@use 'plans';
 
 * {
     margin: 0;
@@ -94,18 +95,18 @@ body {
 
     &__combos {
         display: flex;
-        flex-wrap: wrap; // Para melhor ajuste em telas menores
-        gap: 10px; // Espaço entre os itens
+        flex-wrap: wrap; 
+        gap: 10px; 
 
         &__combo {
             width: 100%;
             max-width: 300px;
-            margin: 0 auto; // Centraliza os itens em telas menores
+            margin: 0 auto;
 
             img {
                 max-width: 100%;
                 height: auto;
-                display: block; // Remove espaço abaixo da imagem
+                display: block; 
             }
 
             button {
@@ -124,7 +125,6 @@ body {
     }
 }
 
-// Responsividade
 @media (max-width: 1024px) {
     .hero {
         padding: 5vw;
@@ -138,6 +138,7 @@ body {
     .hero__content__combos__combo {
         width: 100%;
         max-width: none;
+        margin: 0 auto;
     }
 }
 
@@ -161,4 +162,17 @@ body {
     .text--big {
         @include text(16px);
     }
+}
+
+.button {
+    display: block;
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    color: variaveis.$corTextoSecundario;
+    background-color: #6421ff;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-top: 2vw;
+    margin-bottom: 8px;
 }
