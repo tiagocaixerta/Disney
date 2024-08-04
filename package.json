@@ -1,25 +1,29 @@
 {
-  "name": "clone_disney_plus",
+  "name": "clone_disneyplus",
   "version": "1.0.0",
-  "description": "Um clone do site Disney Plus",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "gulp watch",
     "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Disney",
-    "Clone",
-    "SASS",
-    "Gulp"
-  ],
-  "author": "Seu Nome",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogiansouza/clone_disneyplus.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ogiansouza/clone_disneyplus/issues"
+  },
+  "homepage": "https://github.com/ogiansouza/clone_disneyplus#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-imagemin": "^7.1.0",
     "gulp-sass": "^5.1.0",
-    "sass": "^1.77.8"
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.56.1"
   }
 }
