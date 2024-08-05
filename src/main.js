@@ -4,17 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.querySelector('.hero');
     const alturaHero = heroSection.clientHeight;
 
-    // Função para ocultar elementos do header
     function ocultaElementosDoHeader() {
-        // Implementar a lógica para ocultar elementos do header
+        // Lógica para ocultar elementos do header
     }
 
-    // Função para exibir elementos do header
     function exibeElementosDoHeader() {
-        // Implementar a lógica para exibir elementos do header
+        // Lógica para exibir elementos do header
     }
 
-    // Evento de rolagem para mostrar ou ocultar elementos do header
     window.addEventListener('scroll', function() {
         const posicaoAtual = window.scrollY;
         if (posicaoAtual < alturaHero) {
@@ -24,9 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Adiciona eventos de clique para os botões de aba
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function(event) {
+    buttons.forEach(button => {
+        button.addEventListener('click', function(event) {
             const abaAlvo = event.target.dataset.tabButton;
             const aba = document.querySelector(`[data-tab-id="${abaAlvo}"]`);
             escondeTodasAbas();
@@ -34,21 +30,37 @@ document.addEventListener('DOMContentLoaded', function() {
             removeBotaoAtivo();
             event.target.classList.add('shows_tabs_button_active');
         });
-    }
+    });
 
-    // Remove a classe ativa de todos os botões de aba
-    function removeBotaoAtivo() {
-        const buttons = document.querySelectorAll('[data-tab-button]'); 
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('shows_tabs_button_active');
+    questions.forEach(question => {
+        question.addEventListener('click', function() {
+            abreOuFechaResposta(this.parentElement);
+        });
+    });
+
+    function abreOuFechaResposta(elemento) {
+        const classe = 'faq__questions__item--is-open';
+        const answer = elemento.querySelector('.faq__questions__item__answer');
+
+        if (elemento.classList.contains(classe)) {
+            elemento.classList.remove(classe);
+            answer.style.height = '0';
+        } else {
+            elemento.classList.add(classe);
+            answer.style.height = `${answer.scrollHeight}px`;
         }
     }
 
-    // Esconde todas as abas
+    function removeBotaoAtivo() {
+        buttons.forEach(button => {
+            button.classList.remove('shows_tabs_button_active');
+        });
+    }
+
     function escondeTodasAbas() {
         const tabsContainer = document.querySelectorAll('[data-tab-id]');
-        for (let i = 0; i < tabsContainer.length; i++) {
-            tabsContainer[i].classList.remove('shows_list--is-active');
-        }
+        tabsContainer.forEach(tab => {
+            tab.classList.remove('shows_list--is-active');
+        });
     }
 });

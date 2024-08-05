@@ -1,54 +1,60 @@
 .faq {
     padding: 5.6vw;
-
-    h2 {
-        text-align: center;
-        margin-bottom: 24px;
+  
+    .title {
+      text-align: center;
+      margin-bottom: 24px;
+      color: white;
     }
-
-    &_questions {
-        &_item {
-            background-color: #13151d;
-            margin-bottom: 16px;
-
-            &_question {
-                color: #fff;
-                font-size: 20px;
-                padding: 24px;
-                display: block;
-                cursor: pointer;
-                position: relative;
-
-                &::after {
-                    content: '+';
-                    position: absolute;
-                    top: 0;
-                    right: 24px;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    font-size: 40px;
-                }
-            }
-
-            &_answer {
-                height: 0;
-                overflow: hidden;
-                padding: 0 24px;
-                transition: height, .5s ease;
-            }
-
-            &--is-open {
-                .faq_questions_item_question::after {
-                    content: '-';
-                }
-                
-                .faq_questions_item_answer {
-                    height: auto;
-                    padding-bottom: 24px;
-                    transition: height, .5s ease;
-                }
-            }
+  
+    &__questions {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    &__questions__item {
+      margin-bottom: 20px;
+      border: 1px solid #13151d;
+      border-radius: 4px;
+      overflow: hidden;
+  
+      &--is-open {
+        .faq__questions__item__answer {
+          display: block;
+          height: auto;
         }
+      }
+  
+      &__question {
+        padding: 16px;
+        cursor: pointer;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid #13151d;
+        color: white;
+        background-color: #13151d // background escuro para contraste
+      }
+  
+      &__answer {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease;
+        color: white;
+        background-color: #13151d; // background escuro para contraste
+  
+        &.text--big {
+          font-size: 1.2em;
+        }
+  
+        ul {
+          list-style-type: disc;
+          padding-left: 20px;
+        }
+  
+        li {
+          margin-bottom: 10px;
+        }
+      }
     }
-}
+  }
+  
