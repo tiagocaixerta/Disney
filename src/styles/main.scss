@@ -1,3 +1,4 @@
+// Importar variáveis e módulos
 @use 'variaveis';
 @use 'hero';
 @use 'shows';
@@ -5,14 +6,18 @@
 @use 'available-devices';
 @use 'faq';
 @use 'footer';
+@use 'header';
 
+// Reset de estilo global
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: avenir, sans-serif;
+    list-style: none;
 }
 
+// Fontes
 @font-face {
     font-family: avenir;
     src: url(../../assets/fonts/Avenir-Regular.woff2);
@@ -25,10 +30,12 @@
     font-weight: 700;
 }
 
+// Corpo
 body {
     background-color: variaveis.$corDeFundo;
 }
 
+// Mixins
 @mixin text($fontSize: 16px) {
     font-size: $fontSize;
     line-height: calc(#{$fontSize} + 10px);
@@ -40,6 +47,7 @@ body {
     color: variaveis.$corTextoSecundario;
 }
 
+// Estilos para texto e títulos
 .text--big {
     @include text(18px);
 }
@@ -70,6 +78,72 @@ body {
     @include title(28px);
 }
 
+// Cabeçalho
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: variaveis.$corDeFundo;
+    transition: background-color 0.3s, padding 0.3s;
+
+    &--is-hidden {
+        background-color: transparent;
+        padding: 8px 36px;
+
+        &__logo, &__links__item:first-child {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 36px;
+    }
+
+    &__logo {
+        max-width: 80px;
+        width: 100%;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+
+        &__item {
+            margin-left: 15px;
+            margin: 5px;
+            transition: opacity 0.3s;
+        }
+    }
+
+    .button {
+        height: 50px;
+        font-size: 16px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        text-decoration: none;
+        padding: 8px 14px;
+        letter-spacing: 1px;
+        border: 1px solid;
+
+        &--secundary {
+            background-color: variaveis.$corDeFundoBotaoSecundario;
+            border-color: variaveis.$corDeFundoBotaoSecundario;
+            color: variaveis.$corTextoSecundario;
+        }
+
+        &--dark {
+            background-color: rgba(variaveis.$corDeFundoBotaoDark, 0.8);
+            border-color: variaveis.$corTextoSecundario;
+            color: variaveis.$corTextoSecundario;
+        }
+    }
+}
+
+// Seção Hero
 .hero {
     padding: 3.0vw;
     min-height: 50vh;
@@ -98,8 +172,8 @@ body {
 
     &__combos {
         display: flex;
-        flex-wrap: wrap; 
-        gap: 10px; 
+        flex-wrap: wrap;
+        gap: 10px;
 
         &__combo {
             width: 100%;
@@ -109,51 +183,105 @@ body {
             img {
                 max-width: 100%;
                 height: auto;
-                display: block; 
+                display: block;
             }
 
             button {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 width: 100%;
                 height: 50px;
                 font-size: 16px;
                 color: variaveis.$corTextoSecundario;
-                background-color: #6421ff;
+                background-color: variaveis.$corDeFundoBotaoPrimario;
                 text-transform: uppercase;
                 border-radius: 4px;
-                margin-top: 1.5vw;
-                margin-bottom: 6px;
+                text-decoration: none;
+                padding: 8px 14px;
+                letter-spacing: 1px;
+                border: 1px solid variaveis.$corDeFundoBotaoPrimario;
+
+                &--secundary {
+                    background-color: variaveis.$corDeFundoBotaoSecundario;
+                    border-color: variaveis.$corDeFundoBotaoSecundario;
+
+                    &:hover {
+                        background-color: lighten(variaveis.$corDeFundoBotaoSecundario, 3%);
+                    }
+                }
+
+                &--dark {
+                    background-color: rgba(0, 0, 0, 0.8);
+                    border-color: variaveis.$corTextoSecundario;
+
+                    &:hover {
+                        background-color: variaveis.$corTextoSecundario;
+                        color: variaveis.$corDeFundo;
+                    }
+                }
             }
         }
     }
 }
 
+// Responsividade
 @media (max-width: 1024px) {
     .hero {
         padding: 5vw;
         background-position: center;
+
+        &__content {
+            max-width: 500px;
+        }
+
+        &__branding {
+            max-width: 200px;
+        }
+
+        &__combos__combo {
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+        }
     }
 
-    .hero__content__branding {
-        max-width: 200px;
-    }
-
-    .hero__content__combos__combo {
-        width: 100%;
-        max-width: none;
-        margin: 0 auto;
+    .header {
+        &__container {
+            padding: 8px 24px;
+        }
     }
 }
 
 @media (max-width: 768px) {
-    .hero__content__combos {
+    .hero__combos {
         flex-direction: column;
         align-items: center;
     }
 
-    .hero__content__combos__combo {
+    .hero__combos__combo {
         width: 80%;
         margin-bottom: 20px;
+    }
+
+    .header {
+        &__container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &__logo {
+            max-width: 60px;
+        }
+
+        &__links {
+            margin-top: 10px;
+
+            &__item {
+                margin-left: 10px;
+                margin-bottom: 10px;
+            }
+        }
     }
 }
 
@@ -165,47 +293,52 @@ body {
     .text--big {
         @include text(16px);
     }
+
+    .header {
+        &__container {
+            padding: 8px 16px;
+        }
+
+        &__logo {
+            max-width: 50px;
+        }
+
+        &__links {
+            &__item {
+                font-size: 14px;
+            }
+        }
+    }
 }
 
-.button {
-    display: block;
-    width: 100%;
-    height: 60px;
-    font-size: 18px;
-    color: variaveis.$corTextoSecundario;
-    background-color: #6421ff;
-    text-transform: uppercase;
-    border-radius: 4px;
-    margin-top: 2vw;
-    margin-bottom: 8px;
-}
-
+// Seção de imagem e texto
 .image-text-section {
     padding: 5.6vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
 
-    img{
-max-width: 100%;
+    img {
+        max-width: 100%;
     }
 
     &__text_container {
-        padding:0 2vw;
+        padding: 0 2vw;
     }
 
     h2 {
         margin-bottom: 24px;
     }
 
-    &--image-full-width{
+    &--image-full-width {
         display: block;
         position: relative;
-        img{
+
+        img {
             width: 100%;
         }
 
-        &__text_container{
+        &__text_container {
             position: absolute;
             top: 0;
             left: 50%;
@@ -214,7 +347,6 @@ max-width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-           
         }
     }
 }

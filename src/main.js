@@ -4,14 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.querySelector('.hero');
     const alturaHero = heroSection.clientHeight;
 
-    function ocultaElementosDoHeader() {
-        // Lógica para ocultar elementos do header
-    }
-
-    function exibeElementosDoHeader() {
-        // Lógica para exibir elementos do header
-    }
-
     window.addEventListener('scroll', function() {
         const posicaoAtual = window.scrollY;
         if (posicaoAtual < alturaHero) {
@@ -20,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
             exibeElementosDoHeader();
         }
     });
+
+    function ocultaElementosDoHeader() {
+        const header = document.querySelector('.header');
+        header.classList.add('header--is-hidden');
+    }
+
+    function exibeElementosDoHeader() {
+        const header = document.querySelector('.header');
+        header.classList.remove('header--is-hidden');
+    }
 
     buttons.forEach(button => {
         button.addEventListener('click', function(event) {
@@ -63,4 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
             tab.classList.remove('shows_list--is-active');
         });
     }
+
+  
+    document.addEventListener('DOMContentLoaded', function() {
+        const header = document.querySelector('.header');
+        const threshold = 50; // Altura do rolar para ocultar o cabeçalho
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > threshold) {
+                header.classList.add('header--is-hidden');
+            } else {
+                header.classList.remove('header--is-hidden');
+            }
+        });
+    });
+
+
 });

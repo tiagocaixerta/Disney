@@ -8,6 +8,11 @@
     background-position: center;
     text-align: left; 
 
+    .button {
+        margin-top: 2vw;
+        margin-bottom: 8px;
+    }
+
     &__content {
         max-width: 640px;
         margin: 0 auto;
