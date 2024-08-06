@@ -1,3 +1,4 @@
+// src/scripts/main.js
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('[data-tab-button]');
     const questions = document.querySelectorAll('[data-faq-question]');
@@ -65,36 +66,4 @@ document.addEventListener('DOMContentLoaded', function() {
             tab.classList.remove('shows_list--is-active');
         });
     }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const header = document.querySelector('.header');
-        const threshold = 50; // Altura do rolar para ocultar o cabeçalho
-
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > threshold) {
-                header.classList.add('header--is-hidden');
-            } else {
-                header.classList.remove('header--is-hidden');
-            }
-        });
-    });
 });
-
-// Gulp tasks
-const gulp = require('gulp');
-const uglify = require('gulp-uglify');
-
-function scripts() {
-    return gulp.src('./src/scripts/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js'));
-}
-
-exports.scripts = scripts;
-
-exports.default = gulp.parallel(styles, images, scripts);
-
-exports.watch = function () {
-    gulp.watch('./src/styles/*.scss', gulp.parallel(styles));
-    gulp.watch('./src/scripts/*.js', gulp.parallel(scripts));
-}
